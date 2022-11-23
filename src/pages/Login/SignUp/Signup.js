@@ -1,20 +1,47 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../Context/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Signup = () => {
      const {register, handleSubmit , formState: {errors} } = useForm();
-     const { signUp }= useContext(AuthContext)
+     const { signUp ,updateUser, signInWithGoogle}= useContext(AuthContext)
+      const [registerError, setRegisterError] = useState('')
+
  const handleSignUp = data =>{
+   setRegisterError('')
     console.log(data);
     signUp(data.email, data.password)
     .then(result =>{
         const  user = result.user;
         console.log(user);
+        toast.success('user register successfully')
+          const userInfo = {
+                displayName: data.name
+            }
+// jodi create hoy tahole user update kore dicchi
+        updateUser(userInfo)
+            .then( () => {
+// jodi user thake/update hoy user save kore userCollection database e info patacchi 
+                // saveUsers(data.name, data.email)
+                
+
+            } )
+            .catch(error => console.log(error));
     })
-    .catch(error=> console.log(error));
+    .catch(error=> {
+        console.log(error)
+       setRegisterError(error.message)
+    });
  }
+ const handleGoogleSignin = () => {
+    signInWithGoogle().then(result => {
+      console.log(result.user)
+    
+    //   navigate(from, { replace: true })
+    })
+  }
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
@@ -55,11 +82,11 @@ const Signup = () => {
                     </div>
                
                     <input className='btn btn-accent w-full' value="Sign up" type="submit" />
-                    {/* {signUpError && <p className='text-red-500'>{signUpError}</p>} */}
+                    {registerError && <p className='text-red-500'>{registerError}</p>}
                 </form>
                      <p>Already have an account?<Link className='text-secondary' to="/login">Please login</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
         </div>
         </div>

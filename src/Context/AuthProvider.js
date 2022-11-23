@@ -1,29 +1,67 @@
-import React, { createContext, useState } from 'react';
-import {createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, } from 'firebase/auth'
+import React, { createContext, useEffect, useState } from 'react';
+import {createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, } from 'firebase/auth'
 import app from '../firebase/firebase.config'
 
 export const AuthContext = createContext()
 const auth = getAuth(app);
+const googleProvider = new GoogleAuthProvider()
 
 
 const AuthProvider = ({children}) => {
-    
-        // user registration //
+    const [user , setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
+
+//1. user registration //
     const signUp = (email, password) => {
-        
+        setLoading(true);
         return createUserWithEmailAndPassword(auth, email, password);
     }
 
-            // user login //
+//2. user login //
     const signIn = (email, password) => {
-        
+        setLoading(true);
         return signInWithEmailAndPassword(auth , email , password)
     }
 
-    //context value 
+//3. user State observer //
+    useEffect(()=>{
+        const unsubscribe = onAuthStateChanged(auth, currentUser=>{
+            // console.log('user observing');
+            setUser(currentUser);
+            setLoading(false);
+        });
+
+        return ()=> unsubscribe();
+    } , [])
+
+//4. user log out //
+    const logOut = () => {
+        setLoading(true);
+        return signOut(auth);
+    }
+    
+//5. update user's profile //
+    const updateUser = (userInfo) =>{
+        return updateProfile(user, userInfo);
+        //  return updateProfile(auth.currentUser, userInfo);
+    }
+
+//6.  Google Signin //
+    const signInWithGoogle = () => {
+        setLoading(true)
+        return signInWithPopup(auth, googleProvider)
+    }
+    
+
+//6. context value 
     const authInfo = {
         signUp,
-        signIn
+        signIn,
+        user,
+        logOut,
+        updateUser,
+        loading,
+        signInWithGoogle
         
     }
     return (

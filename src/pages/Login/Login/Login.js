@@ -1,12 +1,17 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
 
 const Login = () => {
         const { register, formState: { errors }, handleSubmit } = useForm();
-        const { signIn }= useContext(AuthContext)
-         const [signInError, setSignInError] = useState('');
+        const { signIn ,signInWithGoogle }= useContext(AuthContext)
+        const [signInError, setSignInError] = useState('');
+        const location = useLocation();
+        const navigate = useNavigate();
+
+        const form = location.state?.form?.pathname || '/';
+
 
          const handleLogin = data =>{
             
@@ -16,6 +21,7 @@ const Login = () => {
             .then(result=>{
                 const user = result.user;
                 console.log(user);
+                navigate(form, {replace: true});
                 // setLoginUserEmail(data.email);
                 
             })
@@ -25,6 +31,15 @@ const Login = () => {
             });
         
         }
+
+        const handleGoogleSignin = () => {
+            signInWithGoogle().then(result => {
+                console.log(result.user)
+
+                //   navigate(from, { replace: true })
+            })
+        }
+
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-700 text-gray-100">
@@ -59,7 +74,7 @@ const Login = () => {
 
                      <p>You have no account <Link className='text-secondary' to="/signup"> Pleas!</Link></p>
                 <div className="divider">OR</div>
-                <button className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
+                <button onClick={handleGoogleSignin} className='btn btn-outline w-full'>CONTINUE WITH GOOGLE</button>
             </div>
             </div>
         </div>

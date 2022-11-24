@@ -1,10 +1,13 @@
 import React from 'react';
+import Categories from '../../categories/Categories';
 import Banner from './Banner/Banner';
+
 
 const Home = () => {
     return (
-        <div>
+        <div  className="w-11/12 mx-auto">
             <Banner></Banner>
+            <Categories></Categories>
         </div>
     );
 };

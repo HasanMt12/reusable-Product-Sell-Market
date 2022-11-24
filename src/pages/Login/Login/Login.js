@@ -2,8 +2,10 @@ import React, { useContext, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider';
+import useTitle from '../../../hooks/useTitle';
 
 const Login = () => {
+    useTitle('Login')
         const { register, formState: { errors }, handleSubmit } = useForm();
         const { signIn ,signInWithGoogle }= useContext(AuthContext)
         const [signInError, setSignInError] = useState('');
@@ -42,7 +44,7 @@ const Login = () => {
 
     return (
         <div className='h-[800px] flex justify-center items-center'>
-            <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-700 text-gray-100">
+            <div className="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-500 text-gray-100">
             <div className='w-96 p-7'>
                 <h2 className='text-xl text-center'>Login</h2>
                 <form onSubmit={handleSubmit(handleLogin)}>

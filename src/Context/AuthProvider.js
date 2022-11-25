@@ -42,8 +42,8 @@ const AuthProvider = ({children}) => {
     
 //5. update user's profile //
     const updateUser = (userInfo) =>{
-        return updateProfile(user, userInfo);
-        //  return updateProfile(auth.currentUser, userInfo);
+        // return updateProfile(user, userInfo);
+         return updateProfile(auth.currentUser, userInfo);
     }
 
 //6.  Google Signin //

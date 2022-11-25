@@ -5,6 +5,7 @@ import SingleCategoryCard from './SingleCategoryCard';
 
 const SingleCategories = () => {
     const allProduct = useLoaderData()
+
     const [modalData , setModalData] = useState(null)
     console.log(allProduct);
     return (

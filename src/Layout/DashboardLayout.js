@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Vivo = () => {
+const DashboardLayout = () => {
     return (
         <div>
             
@@ -8,4 +8,4 @@ const Vivo = () => {
     );
 };
 
-export default Vivo;
+export default DashboardLayout;

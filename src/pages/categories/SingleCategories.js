@@ -19,6 +19,7 @@ const SingleCategories = () => {
                 ></SingleCategoryCard>)
             }
         </div>
+        
         {
             modalData && 
             <BookingModal

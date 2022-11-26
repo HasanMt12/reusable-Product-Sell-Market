@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { FaGratipay,  FaRegPlusSquare,  FaStarHalfAlt } from "react-icons/fa";
 
 
 const SingleCategoryCard = ({product , setModalData}) => {
@@ -58,7 +58,9 @@ const SingleCategoryCard = ({product , setModalData}) => {
                     htmlFor="bookingModal" 
                     className="btn rounded"
                     onClick={()=> setModalData(product)}
-                  >booking</label>
+                  > booking<FaRegPlusSquare className='text-gray-800 ml-4'></FaRegPlusSquare> 
+                  
+                  </label>
                 </div>
               </div>
           </article>

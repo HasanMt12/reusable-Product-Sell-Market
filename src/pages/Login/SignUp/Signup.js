@@ -9,23 +9,27 @@ const Signup = () => {
      const { signUp ,updateUser, signInWithGoogle}= useContext(AuthContext)
      const [registerError, setRegisterError] = useState('')
      const navigate = useNavigate()
+ 
+
  const handleSignUp = data =>{
    setRegisterError('')
+
     console.log(data);
     signUp(data.email, data.password)
     .then(result =>{
         const  user = result.user;
         console.log(user);
         toast.success('user register successfully')
+
           const userInfo = {
                 displayName: data.name
             }
-// jodi create hoy tahole user update kore dicchi
+
         updateUser(userInfo)
             .then( () => {
-// jodi user thake/update hoy user save kore userCollection database e info patacchi 
-                // saveUsers(data.name, data.email)
-                navigate('/');
+
+               saveUser(data.name, data.email , data.roll)
+                
 
             } )
             .catch(error => console.log(error));
@@ -34,7 +38,40 @@ const Signup = () => {
         console.log(error)
        setRegisterError(error.message)
     });
+    
  }
+       const saveUser = (name , email , roll) =>{
+            const user = {name , email , roll};
+            fetch('http://localhost:5000/users', {
+                method: 'POST' ,
+                headers: {
+                    'content-type' : 'application/json'
+                },
+                body: JSON.stringify(user)
+            }).then(res => res.json())
+            .then(data =>{
+                console.log(data);
+                navigate('/');
+            })
+        }
+    //     const saveUser = (name, email,roll ) =>{
+    //     const user ={name, email, roll};
+    //     fetch('http://localhost:5000/users', {
+    //         method: 'POST',
+    //         headers: {
+    //             'content-type': 'application/json'
+    //         },
+    //         body: JSON.stringify(user)
+    //     })
+    //     .then(res => res.json())
+    //     .then(data =>{
+    //         console.log('save',data);
+    //      navigate('/');
+    //     })
+    // }
+
+
+
  const handleGoogleSignin = () => {
     signInWithGoogle().then(result => {
       console.log(result.user)
@@ -68,6 +105,14 @@ const Signup = () => {
                            className="input input-bordered w-full max-w-xs text-gray-600"/>
                             {errors.email && <p className='text-red-600'>{errors.email.message}</p>}
                     </div>
+
+                <select {...register("roll", {
+                        required: "write a valid email"
+                    })}className="select select-bordered text-gray-900 w-full max-w-xs">
+                    <option  value="buyer" className='text-gray-900'>Buyer</option>
+                    <option value="seller"  className='text-gray-900'>Seller</option>
+                </select>
+
                     <div className="form-control w-full max-w-xs mb-6">
                         <label className="label"><span className="label-text text-gray-100">Password</span></label>
                         <input type="password" {...register("password" , {

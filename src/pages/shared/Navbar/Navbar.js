@@ -1,25 +1,61 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Button, InputGroup } from 'reactstrap';
 import { AuthContext } from '../../../Context/AuthProvider';
+import { ThemeContext, themes } from '../../../Context/ThemeContext';
+import './Navbar.css'
 
 
 const Navbar = () => {
+  const [darkMode, setDarkMode] = React.useState(true);
      const [isMenuOpen, setIsMenuOpen] = useState(false);
      const {user , logOut} = useContext(AuthContext);
+
      const handleLogOut = () => {
         logOut()
         .then( ()=> {} )
         .catch(error => console.log(error));
     }
     const menuItems = <React.Fragment>
+       
+        
+      <li>  <InputGroup className="lg:block hidden ">
+          <ThemeContext.Consumer>
+            {({ changeTheme }) => (
+              <Button 
+              className='bg-slate-400 hover:bg-slate-400'
+                
+                onClick={() => {
+                  setDarkMode(!darkMode);
+                  changeTheme(darkMode ? themes.light : themes.dark);
+                }}
+              >
+                <i className={darkMode ? "fas fa-sun" : "fas fa-moon"}></i>
+                <span className="d-lg-none d-md-block">
+                  <div className="form-control">
+                    <label className="label cursor-pointer">
+                      <input
+                        type="checkbox"
+                  
+                        className="toggle toggle-primary"
+                      />
+                    </label>
+                  </div>
+                </span>
+              </Button>
+            )}
+          </ThemeContext.Consumer>
+        </InputGroup>
+        </li> 
         <li><Link to="/">Home</Link></li>
-        <li><Link to="/appointment">blog</Link></li>
+        <li><Link to="/blog">blog</Link></li>
         <li><Link to="/about">About</Link></li>
+
           {user?.uid 
        
        ? <>
             <li><Link to="/dashboard">Dashboard</Link></li>
-            <li><button onClick={handleLogOut}>log out</button></li>
+            <li><Link onClick={handleLogOut}>log out</Link></li>
        </> 
        
        : <li><Link to="/login">Login</Link></li>}
@@ -41,7 +77,7 @@ const Navbar = () => {
           >
         
             <span className="ml-2 text-xl font-bold tracking-wide text-zinc-50  uppercase">
-              Company
+              Sell My Phone
             </span>
           </a>
           <ul className="flex items-center hidden text-zinc-50  space-x-8 lg:flex">
@@ -73,8 +109,8 @@ const Navbar = () => {
               </svg>
             </button>
             {isMenuOpen && (
-              <div className="absolute top-0 left-0 w-full">
-                <div className="p-5 bg-white border rounded shadow-sm">
+              <div className="absolute z-10 top-0 left-0 w-full">
+                <div className="p-5 bg-gray-900 border rounded shadow-lg" >
                   <div className="flex items-center justify-between mb-4">
                     <div>
                       <a
@@ -93,7 +129,7 @@ const Navbar = () => {
                       <button
                         aria-label="Close Menu"
                         title="Close Menu"
-                        className="p-2 -mt-2 -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
+                        className="p-2 -mt-2   -mr-2 transition duration-200 rounded hover:bg-gray-200 focus:bg-gray-200 focus:outline-none focus:shadow-outline"
                         onClick={() => setIsMenuOpen(false)}
                       >
                         <svg className="w-5 text-gray-600" viewBox="0 0 24 24">
@@ -106,7 +142,7 @@ const Navbar = () => {
                     </div>
                   </div>
                   <nav>
-                    <ul className="space-y-4">
+                    <ul className="space-y-4 text-gray-100 font-bold bg-gray-800">
                       {
                           menuItems
                       }

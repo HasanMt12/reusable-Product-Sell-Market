@@ -16,6 +16,11 @@ code {
     monospace;
 }
 
+.white-content{
+  background-color: #5A5D66;
+ 
+}
+
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #F5F5F5;
@@ -36,3 +41,7 @@ code {
   background: -webkit-linear-gradient(to bottom, #348AC7, #7474BF);
   background: linear-gradient(to bottom, #348AC7, #7474BF);
 }
+/* google fonts */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@500;600&family=Great+Vibes&family=Tangerine&display=swap');

@@ -6,6 +6,8 @@ import reportWebVitals from './reportWebVitals';
 import AuthProvider from './Context/AuthProvider';
 import { QueryClient, QueryClientProvider, } from '@tanstack/react-query'
 
+import ThemeContextWrapper from './Context/ThemeContextWrapper';
+
 // Create a client
 const queryClient = new QueryClient()
 
@@ -16,8 +18,10 @@ root.render(
 
     <QueryClientProvider client={queryClient}>
        <AuthProvider>
-         <App />
-       </AuthProvider>
+          <ThemeContextWrapper>
+            <App />
+          </ThemeContextWrapper>
+        </AuthProvider>
     </QueryClientProvider>
    
   </React.StrictMode>

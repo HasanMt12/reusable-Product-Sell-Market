@@ -1,8 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../Layout/DashboardLayout";
 import Main from "../../Layout/Main";
+import Blog from "../../pages/Blog/Blog";
 import Categories from "../../pages/categories/Categories";
 import SingleCategories from "../../pages/categories/SingleCategories";
-import DashBoard from "../../pages/Dashboard/DashBoard";
+import Users from "../../pages/Dashboard/All users/Users";
+import MyOrders from "../../pages/Dashboard/MyOrders";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login/Login";
 import Signup from "../../pages/Login/SignUp/Signup";
@@ -35,12 +38,26 @@ export const router = createBrowserRouter([
                 path: '/categories/:name',
                 element: <SingleCategories></SingleCategories>,
                 loader:({params})=> fetch(`http://localhost:5000/categories/${params.name}`)
+            },
+            {
+                path: '/blog',
+                element: <Blog></Blog>
             }
         ]
     },
     {
         path: '/dashboard',
-        element: <PrivateRouts> <DashBoard></DashBoard> </PrivateRouts>
+        element: <PrivateRouts> <DashboardLayout></DashboardLayout> </PrivateRouts>,
+        children:[
+            {
+                path:'/dashboard',
+                element:<MyOrders></MyOrders>
+            },
+            {
+                path:'/dashboard/users',
+                element:<Users></Users>
+            }
+        ]
     }
 ])
 

@@ -3,19 +3,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { AuthContext } from '../../../Context/AuthProvider';
 import toast from 'react-hot-toast';
+import useToken from '../../../hooks/useToken';
 
 const Signup = () => {
      const {register, handleSubmit , formState: {errors} } = useForm();
      const { signUp ,updateUser, signInWithGoogle}= useContext(AuthContext)
      const [registerError, setRegisterError] = useState('')
+     const [createdUserEmail, setCreatedUserEmail] = useState('')
+     const [token] = useToken(createdUserEmail);
      const navigate = useNavigate()
  
-
+        if(token){
+            navigate('/')
+        }
  const handleSignUp = data =>{
    setRegisterError('')
 
     console.log(data);
+
     signUp(data.email, data.password)
+
     .then(result =>{
         const  user = result.user;
         console.log(user);
@@ -28,7 +35,7 @@ const Signup = () => {
         updateUser(userInfo)
             .then( () => {
 
-               saveUser(data.name, data.email , data.roll)
+               saveUser(data.name, data.email , data.role)
                 
 
             } )
@@ -40,8 +47,8 @@ const Signup = () => {
     });
     
  }
-       const saveUser = (name , email , roll) =>{
-            const user = {name , email , roll};
+       const saveUser = (name , email , role) =>{
+            const user = {name , email , role};
             fetch('http://localhost:5000/users', {
                 method: 'POST' ,
                 headers: {
@@ -50,28 +57,14 @@ const Signup = () => {
                 body: JSON.stringify(user)
             }).then(res => res.json())
             .then(data =>{
-                console.log(data);
-                navigate('/');
+                console.log('test',data);
+                
+                setCreatedUserEmail(email)
+                
             })
         }
-    //     const saveUser = (name, email,roll ) =>{
-    //     const user ={name, email, roll};
-    //     fetch('http://localhost:5000/users', {
-    //         method: 'POST',
-    //         headers: {
-    //             'content-type': 'application/json'
-    //         },
-    //         body: JSON.stringify(user)
-    //     })
-    //     .then(res => res.json())
-    //     .then(data =>{
-    //         console.log('save',data);
-    //      navigate('/');
-    //     })
-    // }
 
-
-
+ 
  const handleGoogleSignin = () => {
     signInWithGoogle().then(result => {
       console.log(result.user)
@@ -106,8 +99,8 @@ const Signup = () => {
                             {errors.email && <p className='text-red-600'>{errors.email.message}</p>}
                     </div>
 
-                <select {...register("roll", {
-                        required: "write a valid email"
+                <select {...register("role", {
+                        required: "select role"
                     })}className="select select-bordered text-gray-900 w-full max-w-xs">
                     <option  value="buyer" className='text-gray-900'>Buyer</option>
                     <option value="seller"  className='text-gray-900'>Seller</option>

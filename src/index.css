@@ -27,7 +27,7 @@ code {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-track {
@@ -36,10 +36,14 @@ code {
 }
 
 ::-webkit-scrollbar-thumb {
-  border-radius: 15px;
+  border-radius: 10px;
   background: #7474BF;
   background: -webkit-linear-gradient(to bottom, #348AC7, #7474BF);
   background: linear-gradient(to bottom, #348AC7, #7474BF);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
 }
 /* google fonts */
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script&display=swap');

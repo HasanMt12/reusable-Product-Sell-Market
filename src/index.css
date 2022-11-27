@@ -16,11 +16,14 @@ code {
     monospace;
 }
 
+
+/* toggle  */
 .white-content{
   background-color: #5A5D66;
  
 }
 
+/* scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   background-color: #F5F5F5;

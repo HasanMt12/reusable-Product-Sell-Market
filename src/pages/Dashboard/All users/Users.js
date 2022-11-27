@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import toast from 'react-hot-toast';
-import { FaGratipay,  FaRegPlusSquare,  FaStarHalfAlt } from "react-icons/fa";
+
 
 const Users = () => {
       const {data: users = [] , refetch } = useQuery({
@@ -15,6 +15,7 @@ const Users = () => {
         }
     });
 
+            // seller verified
     const handleMakeVerified = id => {
         fetch(`http://localhost:5000/users/admin/${id}`, {
             method: 'PUT'
@@ -23,7 +24,7 @@ const Users = () => {
         .then(data => {
             console.log(data);
             if(data.modifiedCount > 0 ){
-                toast.success('make verified successfully')
+                toast.success('make seller verified successfully')
                 refetch();
             }
         })

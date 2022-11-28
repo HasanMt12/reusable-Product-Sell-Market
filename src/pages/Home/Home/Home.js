@@ -1,13 +1,17 @@
 import React from 'react';
+import DropDownDashboard from '../../../Component/DropDownDashboard';
+
 import Categories from '../../categories/Categories';
 import Slider from '../Slider/Slider';
 import Banner from './Banner/Banner';
 
 
 
+
 const Home = () => {
     return (
         <div className="">
+           <DropDownDashboard></DropDownDashboard>
             <Banner></Banner>
             <Categories></Categories>
             <Slider></Slider>

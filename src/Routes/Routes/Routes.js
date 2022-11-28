@@ -6,6 +6,8 @@ import Categories from "../../pages/categories/Categories";
 import SingleCategories from "../../pages/categories/SingleCategories";
 import AddProduct from "../../pages/Dashboard/AddProductByseller/AddProduct";
 import MyProduct from "../../pages/Dashboard/AddProductByseller/MyProduct";
+import AllBuyers from "../../pages/Dashboard/All users/AllBuyers";
+import AllSeller from "../../pages/Dashboard/All users/AllSeller";
 import Users from "../../pages/Dashboard/All users/Users";
 import MyOrders from "../../pages/Dashboard/MyOrders";
 import Payment from "../../pages/Dashboard/Payment";
@@ -60,6 +62,14 @@ export const router = createBrowserRouter([
             {
                 path:'/dashboard/users',
                 element: <AdminRoute><Users></Users></AdminRoute>
+            },
+            {
+                path:'/dashboard/buyer',
+                element: <AllBuyers></AllBuyers>
+            },
+            {
+                path:'/dashboard/seller',
+                element:<AllSeller></AllSeller>
             },
             {
                 path: '/dashboard/addProduct',

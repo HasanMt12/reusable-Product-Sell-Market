@@ -98,7 +98,7 @@ const Signup = () => {
                            className="input input-bordered w-full max-w-xs text-gray-600"/>
                             {errors.email && <p className='text-red-600'>{errors.email.message}</p>}
                     </div>
-
+                            <label className="label"><span className="label-text text-gray-100">Select role</span></label>
                 <select {...register("role", {
                         required: "select role"
                     })}className="select select-bordered text-gray-900 w-full max-w-xs">

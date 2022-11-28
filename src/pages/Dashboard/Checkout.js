@@ -75,6 +75,7 @@ const Checkout = ({bookingData}) => {
                 email,
                 bookingId: _id
             }
+            
             fetch('http://localhost:5000/payments', {
                 method: 'POST',
                 headers: {

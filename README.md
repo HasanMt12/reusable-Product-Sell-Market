@@ -11,7 +11,7 @@ Hosted in FireBase ->[sell may phone](https://used-product-sell-site.web.app/)
 
 ## Admin Id
 - admin@gmail.com
-- 1234a@
+- 1234aA@
 
 ## Tech Stack
 

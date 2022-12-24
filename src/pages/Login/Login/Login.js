@@ -44,8 +44,8 @@ const Login = () => {
         const handleGoogleSignin = () => {
             signInWithGoogle().then(result => {
                 console.log(result.user)
-
-                //   navigate(from, { replace: true })
+                //     setSignInUserEmail(data.email);
+                //   navigate(from, { replace: true });
             })
         }
 

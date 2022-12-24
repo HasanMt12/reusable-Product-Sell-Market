@@ -6,7 +6,7 @@ import { AuthContext } from '../../Context/AuthProvider';
 const MyOrders = () => {
     const {user} = useContext(AuthContext);
 
-     const url = `http://localhost:5000/reservation?email=${user?.email}`;
+     const url = `https://used-product-sell-server.vercel.app/reservation?email=${user?.email}`;
       
        const { data: reservation = [] } = useQuery({
             queryKey: ['reservation', user?.email],
@@ -21,41 +21,40 @@ const MyOrders = () => {
             }
 
        })
-     
+     console.log(reservation);
     return (
         <div >
-        <h2>start</h2>
-        <div >
-                <table className="table w-9/12">
+             <h2 className='text-slate-900 font-bold lg:text-3xl text-center my-2' > Your ( {user?.displayName} ) Orders </h2>
+
+        <div className='o' >
+                <table className="table mx-auto w-9/12">
                     <thead>
                         <tr>
-                            <th></th> 
-                            <th>product Photo</th>
-                            <th>Buyer name</th>
-                            <th>Title</th>
-                            <th>Price</th>
+                            <th className='bg-slate-400'></th> 
+                            <th className='bg-slate-400'>product Photo</th>
+                            <th className='bg-slate-400'>Buyer name</th>
+                            <th className='bg-slate-400'>Title</th>
+                            <th className='bg-slate-400'>Price</th>
                            
-                            <th>action</th>
+                            <th className='bg-slate-400'>action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {
                             reservation &&
-                            reservation?.map((reserve, i)=> 
-
-                            
+                            reservation?.map((reserve, i)=>                 
                             <tr>      
                                 <th>{i + 1}</th>
-                         <div className="avatar">
-                        <div className="rounded w-16 h-16">
+                         <td className="avatar ">
+                        <div className="rounded w-16 h-16 object-center">
                         {reserve?.img && (
                             <img
                             src={reserve.img}
-                            alt="Avatar Tailwind CSS Component"
+                            alt="product img"
                             />
                         )}
                         </div>
-          </div>
+          </td>
                                 <td>{reserve.name}</td>
                                 <td>{reserve.product}</td>
                                 <td>{reserve.price}</td>
@@ -66,7 +65,7 @@ const MyOrders = () => {
                                             to={`/dashboard/payment/${reserve._id}`}
                                         >
                                             <button
-                                                className='btn btn-primary btn-sm'
+                                                className='px-8 p py-3 font-semibold rounded mr-4 bg-slate-700 text-gray-200'
                                             >Pay</button>
                                         </Link>
                                     }

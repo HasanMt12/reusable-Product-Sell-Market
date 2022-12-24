@@ -10,7 +10,7 @@ const SingleCategories = () => {
     console.log(allProduct);
     return (
         <>
-        <div>
+        <div className='my-'>
             {
                 allProduct.map(product=> <SingleCategoryCard
                     key={product._id}

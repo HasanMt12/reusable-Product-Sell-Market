@@ -8,9 +8,9 @@ module.exports = {
     extend: {
       fontFamily: 
       {
-        DancingScript: ['Dancing Script', "cursive"],
-        GreatVibes:['Great Vibes', 'cursive'],
-        Tangerine:['Tangerine', 'cursive'],
+        DancingScript: ['Dancing Script',' cursive' ],
+        GreatVibes:['Great Vibes','cursive' ],
+        Tangerine:['Tangerine', 'cursive' ],
 
       }
     },

@@ -16,7 +16,8 @@ import './Slider.css'
 import { EffectCoverflow, Pagination ,Autoplay} from "swiper";
 
 
-const Slider = () => {
+const Slider = ({ad}) => {
+  const {img} = ad;
     return (
         <div>
          <Swiper
@@ -40,9 +41,9 @@ const Slider = () => {
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+          <img src={img} />
         </SwiperSlide>
-        <SwiperSlide>
+        {/* <SwiperSlide>
           <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
         </SwiperSlide>
         <SwiperSlide>
@@ -56,7 +57,7 @@ const Slider = () => {
         </SwiperSlide>
         <SwiperSlide>
           <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
+        </SwiperSlide> */}
       
       </Swiper>
         </div>

@@ -38,11 +38,12 @@ const AddProduct = () => {
 						categoryName: data.categoryName,
 						OriginalPrice: data.OriginalPrice,
 						sellingPrice: data.sellingPrice,
-						email: data.email
+						email: data.email,
+						mobilBrand: data.mobilBrand
 					}
 					// post product to the database
 
-					fetch('http://localhost:5000/product', {
+					fetch('https://used-product-sell-server.vercel.app/product', {
 						method: 'POST',
 						headers: {
 							'content-type': 'application/json'
@@ -64,9 +65,9 @@ const AddProduct = () => {
 			 <h2 className='text-center text-xl lg:text-2xl my-2 mb-6 text-slate-800'>Welcome <span className='text-green-700'>{user?.displayName}</span> ! let's post an add</h2>
             <h2 className='text-center text-xl lg:text-4xl my-2 text-slate-800'>fill up all input field </h2>
 
-                <section className="p-6 w-10/12 mx-auto bg-gray-700  text-gray-50">
+                <section className="p-6 w-10/12 mx-auto bg-slate-700  text-slate-50">
 				<form onSubmit={handleSubmit(handleAddProduct)} className="container flex flex-col mx-auto space-y-12 ng-untouched ng-pristine ng-valid">
-					<div className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm  bg-slate-800">
+					<div className="grid grid-cols-4 gap-6 p-6 rounded-md shadow-sm  bg-slate-600">
 						<div className="grid grid-cols-6 gap-4 col-span-full lg:col-span-3">
 							
 							
@@ -92,6 +93,13 @@ const AddProduct = () => {
 								{ required: "location is required"}
 									)} type="text" required className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400  border-gray-700  text-gray-900" />
 								{errors.sellerLocation && <p className='text-red-500'>{errors.sellerLocation.message}</p>}
+							</div>
+							<div className="col-span-full sm:col-span-2">
+								<label for="lastname" className="text-sm">Mobil model</label>
+								<input {...register("mobilBrand" ,
+								{ required: "mobilBrand is required"}
+									)} type="text" required className="w-full rounded-md focus:ring focus:ring-opacity-75 focus:ring-violet-400  border-gray-700  text-gray-900" />
+								{errors.mobilBrand && <p className='text-red-500'>{errors.mobilBrand.message}</p>}
 							</div>
 							<div className="col-span-full sm:col-span-2">
 								<label for="lastname" className="text-sm">post date</label>

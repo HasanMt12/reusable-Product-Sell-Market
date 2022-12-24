@@ -12,10 +12,12 @@ const Payment = () => {
     const bookingData = useLoaderData();
     const {price, product , location , email , phone } = bookingData;
     return (
-        <div>
-            <h2> product {product}</h2>
-            <h2>price $ {price}</h2>
-             <div className='w-96 my-12'>
+        <div className=''>
+            <div className='flex justify-center'>
+            <h2 className='mr-16'> product <span className='text-green-600'>{product}</span> </h2>
+            <h2 className=''>price $ <span className='text-green-600'> {price}</span></h2>
+            </div>
+             <div className='w-96 mx-auto bg-slate-300 rounded my-12'>
                 <Elements stripe={stripePromise}>
                     <Checkout
                         bookingData={bookingData}

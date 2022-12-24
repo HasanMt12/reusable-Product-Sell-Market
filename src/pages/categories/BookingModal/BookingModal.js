@@ -27,7 +27,7 @@ const BookingModal = ({modalData , setModalData}) => {
           
         }
     //   console.log(reservation);
-    fetch('http://localhost:5000/reservation', {
+    fetch('https://used-product-sell-server.vercel.app/reservation', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -61,10 +61,10 @@ const BookingModal = ({modalData , setModalData}) => {
                  <input name="name" type="text" defaultValue={user?.displayName} disabled  placeholder="Your Name" className=" input w-11/12 mx-auto font-bold input-bordered" />
                  <input name="email" type="email" defaultValue={user?.email} disabled placeholder="Email Address" className="input w-11/12 mx-auto  bg-slate-400 font-bold input-bordered" />
                  <input name="img" type="url" defaultValue={img} disabled  className="input w-11/12 mx-auto  bg-slate-400 font-bold input-bordered" />
-                 <input name="product" type="text" defaultValue={mobilBrand} disabled placeholder="Phone Number" className="input bg-slate-400 font-bold w-11/12 mx-auto  input-bordered" />
+                 <input name="product" type="text" defaultValue={mobilBrand} disabled placeholder="mobil brand" className="input bg-slate-400 font-bold w-11/12 mx-auto  input-bordered" />
                  <input name="price" type="text"  defaultValue={sellingPrice} disabled className="input bg-slate-400 font-bold w-11/12 mx-auto  input-bordered" />
-                 <input name="phone" type="text" placeholder="please enter your Phone Number"  className="input input-info w-11/12 mx-auto  input-bordered" />
-                 <input name="location" type="text" placeholder="meeting location"  className="input-info input  w-11/12 mx-auto  input-bordered" />
+                 <input name="phone" type="text" placeholder="please enter your Phone Number" required className="input input-info w-11/12 mx-auto  input-bordered" />
+                 <input name="location" type="text" placeholder="meeting location" required className="input-info input  w-11/12 mx-auto  input-bordered" />
                  <input className='btn w-9/12 mx-auto bg-slate-100' type="submit" value="Submit" />
 
            </form>

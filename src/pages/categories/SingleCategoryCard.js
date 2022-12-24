@@ -1,42 +1,41 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { FaGratipay,  FaRegPlusSquare,  FaStarHalfAlt } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider';
 
 
 const SingleCategoryCard = ({product , setModalData}) => {
   const {user} = useContext(AuthContext)
-  
+    const [fill, setFill] = useState(false);
 
-  // const url = `http://localhost:5000/product?email=${user?.email}`;
-  // const {data: products = [] , refetch} = useQuery({
-    
-  //   queryKey: ['product', user?.email],
-  //   queryFn: async () => {
-  //     const res = await fetch(url);
-  //     const data = await res.json();
-  //     return data
-  //   }
-  // })
-  // console.log(product);
-  
-  // console.log(products);
+const handleWishList = (product) => {
+    const dbWishlist = { ...product };
+    dbWishlist.email = user?.email;
+    dbWishlist.color = "red";
+    delete dbWishlist._id;
 
-  // const {data: users = [] ,  } = useQuery({
-  //       queryKey: ['users' , email ],
-  //       queryFn: async() =>{
-  //           const res = await fetch(`http://localhost:5000/users/${email}`);
-  //           const data = await res.json();
-  //           console.log(data);
-  //           return data;
-            
-  //       }
-  //   });
-  //   console.log(users);
+    fetch('https://used-product-sell-server.vercel.app/wishlist', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(dbWishlist),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setFill(true);
+        toast.success("added successfully");
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
+  
 
 
   
-    const {mobilBrand , condition, sellerLocation, sellerName, img ,time , useOfYear, sellingPrice, OriginalPrice} = product;
+    const {mobilBrand , _id, condition, sellerLocation, sellerName, img ,time , useOfYear, sellingPrice, OriginalPrice} = product;
     return (
         <div>
             <article className="flex bg-slate-300 transition hover:shadow-xl w-9/12 mx-auto my-20">
@@ -90,6 +89,28 @@ const SingleCategoryCard = ({product , setModalData}) => {
                     Mobil Condition : {condition}
                   </p>
                 </div>
+                
+                <button
+              onClick={() => handleWishList(product)}
+              className={"w-8 text-center mr-2 "}
+              
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill={product.color ? product.color : "none"}
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"
+                />
+              </svg>
+            </button>
+
                 <div className="sm:flex sm:items-end sm:justify-end">
                   <label 
                     htmlFor="bookingModal" 
@@ -99,15 +120,9 @@ const SingleCategoryCard = ({product , setModalData}) => {
                   
                   </label>
                 </div>
-                <div className="sm:flex sm:items-end sm:justify-end">
-                  <label 
-                   
-                    className="btn rounded"
-                    onClick={()=> setModalData(product)}
-                  > wishlist<FaRegPlusSquare className='text-gray-800 ml-4'></FaRegPlusSquare> 
-                  
-                  </label>
-                </div>
+                {/* <div className="sm:flex sm:items-end sm:justify-end">
+                      <Link to={`/dashboard/wishlist/${_id}`} >whishlist</Link>
+                </div> */}
               </div>
           </article>
 

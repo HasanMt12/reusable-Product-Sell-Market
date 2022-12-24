@@ -13,7 +13,7 @@ const AllBuyers = () => {
        const {data: buyer = [] , refetch  } = useQuery({
         queryKey: ['users'],
         queryFn: async() =>{
-            const res = await fetch('http://localhost:5000/users/buyer');
+            const res = await fetch('https://used-product-sell-server.vercel.app/users/buyer');
             const data = await res.json();
             console.log(data);
             return data;
@@ -23,7 +23,7 @@ const AllBuyers = () => {
 
     //delete buyer
             const handleDeleteUser = user =>{
-        fetch(`http://localhost:5000/users/${user._id}`, {
+        fetch(`https://used-product-sell-server.vercel.app/users/${user._id}`, {
             method: 'DELETE', 
             headers: {
                     authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -40,15 +40,15 @@ const AllBuyers = () => {
     }
     return (
         <div className=''>
-             <div className="overflow-x-auto ">
-                <table className="table w-10/12  mx-auto">
+             <div className="overflow-x-auto mt-6 mx-10/12">
+                <table className="table w-11/12  mx-auto">
                     <thead className='bg-slate-400'>
                     <tr>
-                        <th></th>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>role</th>
-                        <th>Delete user</th>
+                        <th className='bg-slate-400'></th>
+                        <th className='bg-slate-400'>Name</th>
+                        <th className='bg-slate-400'>Email</th>
+                        <th className='bg-slate-400'>role</th>
+                        <th className='bg-slate-400'>Delete user</th>
                     </tr>
                     </thead>
                     <tbody className=''>
@@ -58,7 +58,7 @@ const AllBuyers = () => {
                     >
                         
                             <th>{i+1}</th>
-                            <td className='text-slate-900 font-bold'>{b.name}</td>
+                            <td className='text-slate-900 font-bold '>{b.name}</td>
                             <td>{b.email}</td>
                             <td>{b.role}  </td>
                             <td>

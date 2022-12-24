@@ -4,6 +4,8 @@ import Main from "../../Layout/Main";
 import Blog from "../../pages/Blog/Blog";
 import Categories from "../../pages/categories/Categories";
 import SingleCategories from "../../pages/categories/SingleCategories";
+import WishList from "../../pages/categories/WishList";
+
 import AddProduct from "../../pages/Dashboard/AddProductByseller/AddProduct";
 import MyProduct from "../../pages/Dashboard/AddProductByseller/MyProduct";
 import AllBuyers from "../../pages/Dashboard/All users/AllBuyers";
@@ -11,12 +13,14 @@ import AllSeller from "../../pages/Dashboard/All users/AllSeller";
 import Users from "../../pages/Dashboard/All users/Users";
 import MyOrders from "../../pages/Dashboard/MyOrders";
 import Payment from "../../pages/Dashboard/Payment";
+import About from "../../pages/Home/Home/About";
 import Home from "../../pages/Home/Home/Home";
 import Login from "../../pages/Login/Login/Login";
 import Signup from "../../pages/Login/SignUp/Signup";
 import ErrorPage from "../../pages/shared/ErrorPage/ErrorPage";
 import AdminRoute from "../AdminRoute/AdminRoute";
 import PrivateRouts from "../PrivateRoute/PrivateRoute";
+import SellerRoutes from "../SellerRoutes/SellerRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -43,12 +47,18 @@ export const router = createBrowserRouter([
             {
                 path: '/categories/:name',
                 element: <SingleCategories></SingleCategories>,
-                loader:({params})=> fetch(`http://localhost:5000/categories/${params.name}`)
+                loader:({params})=> fetch(`https://used-product-sell-server.vercel.app/categories/${params.name}`)
             },
             {
                 path: '/blog',
                 element: <Blog></Blog>
-            }
+            },
+            {
+                path: '/about',
+                element: <About></About>
+            },
+          
+           
         ]
     },
     {
@@ -65,25 +75,31 @@ export const router = createBrowserRouter([
             },
             {
                 path:'/dashboard/buyer',
-                element: <AllBuyers></AllBuyers>
+                element:  <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path:'/dashboard/seller',
-                element:<AllSeller></AllSeller>
+                element: <AdminRoute><AllSeller></AllSeller></AdminRoute>
             },
             {
                 path: '/dashboard/addProduct',
-                element: <AddProduct></AddProduct>
+                element:   <SellerRoutes><AddProduct></AddProduct></SellerRoutes>
             },
             {
                 path: '/dashboard/myProduct',
-                element: <MyProduct></MyProduct>
+                element: <SellerRoutes> <MyProduct></MyProduct></SellerRoutes>
             },
             {
                 path: '/dashboard/payment/:id',
                 element: <Payment></Payment>,
-                loader: ({params}) => fetch(`http://localhost:5000/reservation/${params.id}`)
-            }
+                loader: ({params}) => fetch(`https://used-product-sell-server.vercel.app/reservation/${params.id}`)
+            },
+             {
+            path: '/dashboard/wishlist',
+            element: <WishList></WishList>
+           }
+           
+             
         ]
     }
 ])

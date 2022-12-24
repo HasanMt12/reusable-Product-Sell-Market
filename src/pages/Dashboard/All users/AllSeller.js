@@ -14,7 +14,7 @@ const AllSeller = () => {
   const {data: seller = [] , refetch  } = useQuery({
         queryKey: ['users'],
         queryFn: async() =>{
-            const res = await fetch('http://localhost:5000/users/seller');
+            const res = await fetch('https://used-product-sell-server.vercel.app/users/seller');
             const data = await res.json();
             console.log(data);
             return data;
@@ -24,7 +24,7 @@ const AllSeller = () => {
 
     //delete seller 
         const handleDeleteUser = user =>{
-      fetch(`http://localhost:5000/users/${user._id}`, {
+      fetch(`https://used-product-sell-server.vercel.app/users/${user._id}`, {
         method: 'DELETE', 
          headers: {
                 authorization: `bearer ${localStorage.getItem('accessToken')}`
@@ -42,7 +42,7 @@ const AllSeller = () => {
 
       // seller verified
           const handleMakeVerified = id => {
-              fetch(`http://localhost:5000/users/admin/${id}`, {
+              fetch(`https://used-product-sell-server.vercel.app/users/admin/${id}`, {
                   method: 'PUT'
               })
               .then(res => res.json())
@@ -56,16 +56,16 @@ const AllSeller = () => {
           }
     return (
         <div>
-                            <div className="overflow-x-auto">
+                            <div className="overflow-x-auto mx-auto w-11/12 mt-6">
                 <table className="table w-full">
                   <thead>
                     <tr>
-                      <th></th>
-                      <th>Name</th>
-                      <th>Email</th>
-                      <th>role</th>
-                      <th>make verify</th>
-                      <th>Delete user</th>
+                      <th className='bg-slate-400'></th>
+                      <th className='bg-slate-400'>Name</th>
+                      <th className='bg-slate-400'>Email</th>
+                      <th className='bg-slate-400'>role</th>
+                      <th className='bg-slate-400'>make verify</th>
+                      <th className='bg-slate-400'>Delete user</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -77,7 +77,7 @@ const AllSeller = () => {
             <td>{s.name}</td>
             <td>{s.email}</td>
             <td>{s.role}</td>
-           <td>{ s?.verification !== 'verify' ? <button onClick={()=> handleMakeVerified(s._id)} className="btn btn-xs  text-gray-900 ">make verified</button>
+           <td>{ s?.verification !== 'verify' ? <button onClick={()=> handleMakeVerified(s._id)} className="btn btn-xs  text-gray-900 ">verify seller</button>
            :<p className='text-green-500 '> verified seller</p>} </td>
 
             <td>

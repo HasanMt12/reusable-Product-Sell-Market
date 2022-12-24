@@ -13,7 +13,7 @@ const Checkout = ({bookingData}) => {
 
          useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://used-product-sell-server.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -76,7 +76,7 @@ const Checkout = ({bookingData}) => {
                 bookingId: _id
             }
             
-            fetch('http://localhost:5000/payments', {
+            fetch('https://used-product-sell-server.vercel.app/payments', {
                 method: 'POST',
                 headers: {
                     'content-type': 'application/json'
@@ -96,8 +96,9 @@ const Checkout = ({bookingData}) => {
 
        }
     return (
-         <>
-            <form onSubmit={handleSubmit}>
+         <div>
+            <div className=' border bg-slate- px-2 py-2'>
+            <form className='bg-slate-200 px-26 py-2' onSubmit={handleSubmit}>
                 <CardElement
                     options={{
                         style: {
@@ -109,13 +110,13 @@ const Checkout = ({bookingData}) => {
                                 },
                             },
                             invalid: {
-                                color: '#9e2146',
+                                color: '#0284c7',
                             },
                         },
                     }}
                 />
                 <button
-                    className='btn btn-sm mt-4 btn-primary'
+                    className='btn btn-sm mt-4 btn-slate-600'
                     type="submit"
                     disabled={!stripe || !clientSecret || processing}> 
                     Pay
@@ -128,7 +129,8 @@ const Checkout = ({bookingData}) => {
                     <p>Your transactionId: <span className='font-bold'>{transactionId}</span></p>
                 </div>
             }
-        </>
+        </div>
+        </div>
     );
 };
 

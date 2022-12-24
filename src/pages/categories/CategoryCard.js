@@ -4,10 +4,10 @@ import { Link } from 'react-router-dom';
 const CategoryCard = ({category}) => {
     const {name , logo} = category;
     return (
-        <div className='mx-auto mx-16 '>
+        <div className='mx-auto  '>
             <Link to={`categories/${name}`}>
-                <div className="card w-96 bg-gray-200 shadow-xl">
-                    <figure className=' '><img className='h-56' src={logo} alt="brand" /></figure>
+                <div className="card w-80 h-3/5 bg-gray-200 shadow-xl">
+                    <figure className=''><img className='h-56' src={logo} alt="brand" /></figure>
                     <div className="card-body flex justify-between ">
                         <h2 className="card-title text-gray-700" >{name}</h2>
                          <Link
